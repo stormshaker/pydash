@@ -335,7 +335,7 @@ def get_netstat():
     return data
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def index(request):
     context = {'time_refresh': time_refresh,
                'time_refresh_long': time_refresh_long,
@@ -343,7 +343,7 @@ def index(request):
                'version': version}
     return render(request, 'main.html', context)
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getnetstat(request):
     """
     Return netstat output
@@ -360,7 +360,7 @@ def getnetstat(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def platform_info(request, name):
     """
     Return the hostname
@@ -397,7 +397,7 @@ def platform_info(request, name):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getcpus(request, name):
     """
     Return the CPU number and type/model
@@ -426,7 +426,7 @@ def getcpus(request, name):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def uptime(request):
     """
     Return uptime
@@ -443,7 +443,7 @@ def uptime(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getdisk(request):
     """
     Return the disk usage
@@ -460,7 +460,7 @@ def getdisk(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getips(request):
     """
     Return the IPs and interfaces
@@ -477,7 +477,7 @@ def getips(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getusers(request):
     """
     Return online users
@@ -494,7 +494,7 @@ def getusers(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getproc(request):
     """
     Return the running processes
@@ -512,7 +512,7 @@ def getproc(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def cpuusage(request):
     """
     Return CPU Usage in %
@@ -541,7 +541,7 @@ def cpuusage(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def memusage(request):
     """
     Return Memory Usage in % and numeric
@@ -665,7 +665,7 @@ def memusage(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def loadaverage(request):
     """
     Return Load Average numeric
@@ -725,7 +725,7 @@ def loadaverage(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def gettraffic(request):
     """
     Return the traffic for the interface
@@ -848,7 +848,7 @@ def gettraffic(request):
     return response
 
 
-@login_required(login_url='../login/')
+@login_required(login_url='login/')
 def getdiskio(request):
     """
     Return the reads and writes for the drive
