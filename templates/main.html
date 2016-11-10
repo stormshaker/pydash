@@ -330,7 +330,7 @@
 var mem_ctx = $("#memoryChart").get(0).getContext("2d");
         var memChart = new Chart(mem_ctx);
         function memory_usage(){
-            $.getJSON('/info/memory/', function(data) {
+            $.getJSON('info/memory/', function(data) {
                 var options = {
                     animation : false,
                     pointDotRadius : 4,
@@ -343,7 +343,7 @@ var mem_ctx = $("#memoryChart").get(0).getContext("2d");
 var cpu_ctx = $("#cpuuChart").get(0).getContext("2d");
         var cpuChart = new Chart(cpu_ctx);
         function cpuu_usage(){
-            $.getJSON('/info/cpuusage/', function(data) {
+            $.getJSON('info/cpuusage/', function(data) {
                 var options = {
                     percentageInnerCutout : 50,
                     segmentStrokeWidth : 0
@@ -355,7 +355,7 @@ var cpu_ctx = $("#cpuuChart").get(0).getContext("2d");
 var trf_ctx = $("#trfChart").get(0).getContext("2d");
         var trfChart = new Chart(trf_ctx);
         function traffic_usage(){
-            $.getJSON('/info/gettraffic/', function(data) {
+            $.getJSON('info/gettraffic/', function(data) {
                 var options = {
                     animation : false,
                     pointDotRadius : 2,
@@ -368,7 +368,7 @@ var trf_ctx = $("#trfChart").get(0).getContext("2d");
 var dsk_ctx = $("#dskChart").get(0).getContext("2d");
         var dskChart = new Chart(dsk_ctx);
         function disk_io(){
-            $.getJSON('/info/getdiskio/', function(data) {
+            $.getJSON('info/getdiskio/', function(data) {
                 var options = {
                     animation : false,
                     pointDotRadius : 2,
@@ -381,7 +381,7 @@ var dsk_ctx = $("#dskChart").get(0).getContext("2d");
 var load_ctx = $("#loadChart").get(0).getContext("2d");
         var loadChart = new Chart(load_ctx);
         function load_average(){
-            $.getJSON('/info/loadaverage/', function(data) {
+            $.getJSON('info/loadaverage/', function(data) {
                 var options = {
                     animation : false,
                     pointDotRadius : 2,

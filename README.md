@@ -1,9 +1,21 @@
-pyDash - v1.4.6
+pyDash - v1.5.0
 ======
 
+Update: 10 Nov 2016
+@Gadgetreactor - this is an awesome project. Rewritten it so it is a drop in app to your Django project and updated to Django 1.10 
+Add pydash to your Django project folder.
 
-[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/2630601/k3onipydash-on-GitHub "Flattr this")
++ Open your existing settings.py
++ Add pydash to your installed apps
++ modify your project urls.py
++ Add the following line `url(r'^dashboard/', include('pydash.urls')),`
++ dashboard can be replaced accordingly
++ copy the static folder to your own static location
++ Load up your server!
 
+
+-----------------------
+Forked from 
 
 A small web-based monitoring dashboard for your linux pc/server writen in Python and Django + Chart.js.
 
@@ -12,7 +24,7 @@ The dashboard is built using only Python libraries available in the main Python 
 
 Current dependencies:
 
-  - >= Django 1.5
+  - >= Django 1.10
   - >= Python 2.x
   - >= Python 3.x
 
@@ -67,3 +79,4 @@ Credits
 [Dashboard Template](http://www.egrappler.com/templatevamp-free-twitter-bootstrap-admin-template/), 
 [Bootstrap](http://getbootstrap.com/), 
 [Font Awesome](http://fontawesome.io/)
+[pyDash](https://github.com/k3oni/pydash)
