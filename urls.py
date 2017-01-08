@@ -12,6 +12,7 @@ urlpatterns = [
     #url(r'^main/$', views.getall, name='main'),
     url(r'^info/uptime/$', views.uptime, name='uptime'),
     url(r'^info/temp/$', views.temp, name='temp'),
+    url(r'^info/humidity/$', views.humidity, name='humidity'),
     url(r'^info/memory/$', views.memusage, name='memusage'),
     url(r'^info/cpuusage/$', views.cpuusage, name='cpuusage'),
     url(r'^info/getdisk/$', views.getdisk, name='getdisk'),

@@ -107,6 +107,10 @@ dashboard.getTemp = function () {
     get_os_data('info/temp/', "#get-temp");
 };
 
+dashboard.getHumidity = function () {
+    get_os_data('info/humidity/', "#get-humidity");
+};
+
 dashboard.getOSname = function () {
     get_os_data('info/platform/osname/', "#get-osname");
 };

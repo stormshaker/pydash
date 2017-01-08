@@ -329,6 +329,19 @@ def get_temp():
     return data
 
 
+def get_humidity():
+    """
+    Get humidty from DHT 11 sensor on Arduino using nanpy
+    """
+    try:
+        dht = DHT(10,DHT.DHT11) 
+        data = dht.readHumidity()
+    except Exception as err:
+        data = str(err)
+       
+    return data
+
+
 def get_netstat():
     """
     Get ports and applications
@@ -467,6 +480,23 @@ def temp(request):
         temp = None
 
     data = json.dumps(temp)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+
+@login_required(login_url='login/')
+def humidity(request):
+    """
+    Return Humidity
+    """
+    try:
+        humidity = get_humidity()
+    except Exception:
+        temp = None
+
+    data = json.dumps(humidity)
     response = HttpResponse()
     response['Content-Type'] = "text/javascript"
     response.write(data)
