@@ -31,8 +31,8 @@ from django.shortcuts import render_to_response #remove
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-
 from django.http import HttpResponse
+from nanpy import DHT
 
 #All refresh values are in miliseconds, 1 second = 1000 miliseconds
 #Adjust accordingly as you wish
@@ -316,6 +316,19 @@ def get_load():
     return data
 
 
+def get_temp():
+    """
+    Get temp and humidty from DHT 11 sensor on Arduino using nanpy
+    """
+    try:
+        dht = DHT(10,DHT.DHT11) 
+        data = dht.readTemperature(False)
+    except Exception as err:
+        data = str(err)
+       
+    return data
+
+
 def get_netstat():
     """
     Get ports and applications
@@ -437,6 +450,23 @@ def uptime(request):
         up_time = None
 
     data = json.dumps(up_time)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+
+@login_required(login_url='login/')
+def temp(request):
+    """
+    Return Temprature
+    """
+    try:
+        temp = get_temp()
+    except Exception:
+        temp = None
+
+    data = json.dumps(temp)
     response = HttpResponse()
     response['Content-Type'] = "text/javascript"
     response.write(data)

@@ -103,6 +103,10 @@ dashboard.getUptime = function () {
     get_os_data('info/uptime/', "#get-uptime");
 };
 
+dashboard.getTemp = function () {
+    get_os_data('info/temp/', "#get-temp");
+};
+
 dashboard.getOSname = function () {
     get_os_data('info/platform/osname/', "#get-osname");
 };

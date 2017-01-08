@@ -73,6 +73,7 @@
               <div style="text-align:center;">
         <b>OS:</b> <span class="" id="get-osname"></span><br>
                 <b>Uptime:</b> <span class="" id="get-uptime"></span> Hours<br>
+                <b>Tempreture:</b> <span class="" id="get-temp"></span> Degrees<br>
                 <b>Hostname:</b> <span class="" id="get-hostname"></span><br>
                 <b>Kernel:</b> <span class="" id="get-kernel"></span><br>
         <b>CPU(s):</b> <span class="" id="get-cpucount"></span> x <span class="" id="get-cputype"></span>
@@ -399,6 +400,7 @@ $(function() {
             window.setInterval('traffic_usage()', {{ time_refresh_net }});
             window.setInterval('disk_io()', {{ time_refresh_net }});
             window.setInterval('dashboard.getUptime()', {{ time_refresh_long }});
+            window.setInterval('dashboard.getTemp()', {{ time_refresh }});
             window.setInterval('dashboard.getDisk()', {{ time_refresh_long }});
             window.setInterval('dashboard.getUsers()', {{ time_refresh_long }});
             window.setInterval('dashboard.getNetstat()', {{ time_refresh_long }});
@@ -413,6 +415,7 @@ $(function pageLoad() {
     disk_io();
     dashboard.getOSname();
     dashboard.getUptime();
+    dashboard.getTemp();
     dashboard.getHostname();
     dashboard.getKernel();
     dashboard.getCPUcount();
