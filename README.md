@@ -27,6 +27,7 @@ Current dependencies:
   - >= Django 1.10
   - >= Python 2.x
   - >= Python 3.x
+  - >= django-background-tasks 1.0.15
 
 Django App
 ==========
