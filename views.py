@@ -25,6 +25,7 @@ import os
 import multiprocessing
 from datetime import timedelta
 import json
+from . import collector
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response #remove
@@ -595,6 +596,21 @@ def cpuusage(request):
     ]
 
     data = json.dumps(cpu)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+def startcollector(request):
+    """
+    Start the background collector
+    """
+    try:
+        result = str(collector.datacollector())
+    except Exception as err:
+        result = str(err)
+
+    data = json.dumps(result)
     response = HttpResponse()
     response['Content-Type'] = "text/javascript"
     response.write(data)

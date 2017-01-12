@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^info/platform/([\w\-\.]+)/$', views.platform_info, name='platform'),
     url(r'^info/getcpus/([\w\-\.]+)/$', views.getcpus, name='getcpus'),
     url(r'^info/getnetstat/$', views.getnetstat, name='getnetstat'),
+    url(r'^info/startcollector/$', views.startcollector, name='collector'),
 ]
 

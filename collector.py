@@ -1,25 +1,27 @@
 # Collect monitor data from sensors and write to database
 from nanpy import DHT
-import time
-import datetime
+from django.utils import timezone
 from pydash.models import Measurement
 from background_task import background
 
-@background(schedule=60)
+@background(schedule=10)
 def datacollector():
 
-	dht = DHT(10,DHT.DHT11)
+    # TODO: Ensure only a single instance runs
 
-	while True:
-	    """
-	    Get temp and humidty from DHT 11 sensor on Arduino using nanpy
-	    """
-	    try:
-	        temp = dht.readTemperature(False)
-	        humid = dht.readHumidity()
-	        measure = Measurement(date=datetime.datetime.now(), roomtemp=t, roomhumidity=humid, watertemp='0', ph='0')    
-	        measure.save()
+    dht = DHT(10,DHT.DHT11)
 
-	    except Exception as err:
-	        print(str(err))
+    """
+    Get temp and humidty from DHT 11 sensor on Arduino using nanpy
+    """
+    try:
+        temp = dht.readTemperature(False)
+        humid = dht.readHumidity()
+        measure = Measurement(date=timezone.now(), roomtemp=temp, roomhumidity=humid, watertemp='0', ph='0')    
+        measure.save()
+        print("Data saved")
 
+    except Exception as err:
+        print(str(err))
+
+    return "Collector Started"
