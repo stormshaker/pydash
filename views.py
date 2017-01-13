@@ -25,7 +25,8 @@ import os
 import multiprocessing
 from datetime import timedelta
 import json
-from . import collector
+
+from . import tasks
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response #remove
@@ -34,6 +35,7 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.http import HttpResponse
 from nanpy import DHT
+
 
 #All refresh values are in miliseconds, 1 second = 1000 miliseconds
 #Adjust accordingly as you wish
@@ -606,7 +608,7 @@ def startcollector(request):
     Start the background collector
     """
     try:
-        result = str(collector.datacollector())
+        result = str(tasks.datacollector(repeat=60))
     except Exception as err:
         result = str(err)
 
