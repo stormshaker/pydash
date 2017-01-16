@@ -1,7 +1,7 @@
-AquapyDash - v0.0.1
+AquapyDash - v0.0.2
 ==========
 
-Modified version of k3oni's pyDash for Aquarium monitoring and controlling using an Arduino and Raspberry Pi
+Modified version of GadgetReactor's pyDash for Aquarium monitoring and controlling using an Arduino and Raspberry Pi
 Add pydash to your Django project folder.
 
 + Open your existing settings.py
@@ -26,7 +26,8 @@ Current dependencies:
   - >= Django 1.10
   - >= Python 2.x
   - >= Python 3.x
-  - >= django-background-tasks 1.0.15
+  - >= django-background-tasks 1.1.0rc2
+  - Nanpy
 
 Django App
 ==========
