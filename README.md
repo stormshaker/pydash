@@ -1,8 +1,7 @@
-pyDash - v1.5.0
-======
+AquapyDash - v0.0.1
+==========
 
-Update: 10 Nov 2016
-@Gadgetreactor - this is an awesome project. Rewritten it so it is a drop in app to your Django project and updated to Django 1.10 
+Modified version of k3oni's pyDash for Aquarium monitoring and controlling using an Arduino and Raspberry Pi
 Add pydash to your Django project folder.
 
 + Open your existing settings.py
@@ -55,14 +54,7 @@ OS Support
 ==========
 
 pyDash was tested and runs under the following OSs:
-  - Centos
-  - Fedora
-  - Ubuntu
-  - Debian
   - Raspbian
-  - Pidora
-  - Arch Linux
-
 
 Might work under others, but didn't get to test any other OSs just yet.
 

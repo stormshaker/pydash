@@ -111,6 +111,10 @@ dashboard.getHumidity = function () {
     get_os_data('info/humidity/', "#get-humidity");
 };
 
+dashboard.getLastUpdated = function () {
+    get_os_data('info/lastupdated/', "#get-lastupdated");
+};
+
 dashboard.getOSname = function () {
     get_os_data('info/platform/osname/', "#get-osname");
 };

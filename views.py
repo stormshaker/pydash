@@ -23,7 +23,7 @@
 import platform
 import os
 import multiprocessing
-from datetime import timedelta
+from datetime import timedelta, datetime
 import json
 
 from . import tasks
@@ -34,7 +34,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.http import HttpResponse
-from nanpy import DHT
+from pydash.models import Aquarium
+from django.utils import timezone
 
 
 #All refresh values are in miliseconds, 1 second = 1000 miliseconds
@@ -47,6 +48,48 @@ time_refresh = TIME_JS_REFRESH
 time_refresh_long = TIME_JS_REFRESH_LONG
 time_refresh_net = TIME_JS_REFRESH_NET
 version = "1.5.0"
+
+def pretty_date(time=False):
+    """
+    Get a datetime object or a int() Epoch timestamp and return a
+    pretty string like 'an hour ago', 'Yesterday', '3 months ago',
+    'just now', etc
+    """
+    now = timezone.now()
+    if type(time) is int:
+        diff = now - datetime.fromtimestamp(time)
+    elif isinstance(time,datetime):
+        diff = now - time
+    elif not time:
+        diff = now - now
+    second_diff = diff.seconds
+    day_diff = diff.days
+
+    if day_diff < 0:
+        return ''
+
+    if day_diff == 0:
+        if second_diff < 10:
+            return "just now"
+        if second_diff < 60:
+            return str("{0:.0f}".format(second_diff)) + " seconds ago"
+        if second_diff < 120:
+            return "a minute ago"
+        if second_diff < 3600:
+            return str("{0:.0f}".format(second_diff / 60)) + " minutes ago"
+        if second_diff < 7200:
+            return "an hour ago"
+        if second_diff < 86400:
+            return str("{0:.0f}".format(second_diff / 3600)) + " hours ago"
+    if day_diff == 1:
+        return "Yesterday"
+    if day_diff < 7:
+        return str(day_diff) + " days ago"
+    if day_diff < 31:
+        return str("{0:.0f}".format(day_diff / 7)) + " weeks ago"
+    if day_diff < 365:
+        return str("{0:.0f}".format(day_diff / 30)) + " months ago"
+    return str("{0:.0f}".format(day_diff / 365)) + " years ago"
 
 def chunks(get, n):
     return [get[i:i + n] for i in range(0, len(get), n)]
@@ -324,8 +367,8 @@ def get_temp():
     Get temp and humidty from DHT 11 sensor on Arduino using nanpy
     """
     try:
-        dht = DHT(10,DHT.DHT11) 
-        data = dht.readTemperature(False)
+        a = Aquarium()
+        data = str(a.roomtemp)
     except Exception as err:
         data = str(err)
        
@@ -337,8 +380,8 @@ def get_humidity():
     Get humidty from DHT 11 sensor on Arduino using nanpy
     """
     try:
-        dht = DHT(10,DHT.DHT11) 
-        data = dht.readHumidity()
+        a = Aquarium()
+        data = str(a.roomhumidity)
     except Exception as err:
         data = str(err)
        
@@ -488,6 +531,22 @@ def temp(request):
     response.write(data)
     return response
 
+@login_required(login_url='login/')
+def lastupdated(request):
+    """
+    Return last updated time
+    """
+    try:
+        a = Aquarium()
+        updatetime = pretty_date(a.lastupdated())
+    except Exception as err:
+        updatetime = str(err)
+
+    data = json.dumps(updatetime)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
 
 @login_required(login_url='login/')
 def humidity(request):
@@ -602,22 +661,6 @@ def cpuusage(request):
     response['Content-Type'] = "text/javascript"
     response.write(data)
     return response
-
-def startcollector(request):
-    """
-    Start the background collector
-    """
-    try:
-        result = str(tasks.datacollector(repeat=60))
-    except Exception as err:
-        result = str(err)
-
-    data = json.dumps(result)
-    response = HttpResponse()
-    response['Content-Type'] = "text/javascript"
-    response.write(data)
-    return response
-
 
 @login_required(login_url='login/')
 def memusage(request):

@@ -2,4 +2,4 @@
 ._*
 *.sqlite3
 *_pycache_*
-
+.DS_Store

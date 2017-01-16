@@ -16,7 +16,7 @@
     {% block style %}{% endblock %}
 </head>
 <body>
-<a href="https://github.com/k3oni/pydash"><img style="position: absolute; top: 0; right: 0; border: 0;z-index:99999999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
 <div class="navbar navbar-fixed-top" style="">
     <div class="navbar-inner">
     <div class="container">
@@ -75,6 +75,7 @@
                 <b>Uptime:</b> <span class="" id="get-uptime"></span> Hours<br>
                 <b>Temprature:</b> <span class="" id="get-temp"></span> Degrees<br>
                 <b>Humidity:</b> <span class="" id="get-humidity"></span> Percent<br>
+                <b>Last Updated:</b> <span class="" id="get-lastupdated"></span><br>
                 <b>Hostname:</b> <span class="" id="get-hostname"></span><br>
                 <b>Kernel:</b> <span class="" id="get-kernel"></span><br>
         <b>CPU(s):</b> <span class="" id="get-cpucount"></span> x <span class="" id="get-cputype"></span>
@@ -236,7 +237,10 @@
       <!-- /row -->
 
     <div class="row">
-        <div class="span6">
+    	<div class="span4">
+    		<button type="button" class="btn btn-outline-primary">Test</button>
+    	</div>
+        <div class="span4">
              <div class="widget widget-table action-table">
                 <div class="widget-header"> <i class="fa fa-group"></i>
                   <h3>Online</h3><i class="fa fa-minus"></i>
@@ -253,7 +257,7 @@
               <!-- /widget -->
         </div>
         <!-- /span -->
-        <div class="span6">
+        <div class="span4">
              <div class="widget widget-table action-table">
                 <div class="widget-header"> <i class="fa fa-angle-down"></i>
                   <h3>Netstat</h3><i class="fa fa-minus"></i>
@@ -403,6 +407,7 @@ $(function() {
             window.setInterval('dashboard.getUptime()', {{ time_refresh_long }});
             window.setInterval('dashboard.getTemp()', {{ time_refresh }});
             window.setInterval('dashboard.getHumidity()', {{ time_refresh }});
+            window.setInterval('dashboard.getLastUpdated()', {{ time_refresh }});
             window.setInterval('dashboard.getDisk()', {{ time_refresh_long }});
             window.setInterval('dashboard.getUsers()', {{ time_refresh_long }});
             window.setInterval('dashboard.getNetstat()', {{ time_refresh_long }});
@@ -419,6 +424,7 @@ $(function pageLoad() {
     dashboard.getUptime();
     dashboard.getTemp();
     dashboard.getHumidity();
+    dashboard.getLastUpdated();
     dashboard.getHostname();
     dashboard.getKernel();
     dashboard.getCPUcount();
