@@ -115,6 +115,14 @@ dashboard.getLastUpdated = function () {
     get_os_data('info/lastupdated/', "#get-lastupdated");
 };
 
+dashboard.frontlighton = function () {
+    get_os_data('info/frontlighton/', "#frontlighton");
+};
+
+dashboard.frontlightoff = function () {
+    get_os_data('info/frontlightoff/', "#frontlightoff");
+};
+
 dashboard.getOSname = function () {
     get_os_data('info/platform/osname/', "#get-osname");
 };

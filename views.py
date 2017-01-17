@@ -406,7 +406,6 @@ def get_netstat():
 
     return data
 
-
 @login_required(login_url='login/')
 def index(request):
     context = {'time_refresh': time_refresh,
@@ -543,6 +542,42 @@ def lastupdated(request):
         updatetime = str(err)
 
     data = json.dumps(updatetime)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+@login_required(login_url='login/')
+def frontlightoff(request):
+    """
+    Return last updated time
+    """
+    try:
+        a = Aquarium.objects.get(pk=1)
+        a.set_front_light_off()
+        data = "Light Off"
+    except Exception as err:
+        data = str(err)
+       
+    data = json.dumps(data)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+@login_required(login_url='login/')
+def frontlighton(request):
+    """
+    Return last updated time
+    """
+    try:
+        a = Aquarium.objects.get(pk=1)
+        a.set_front_light_on()
+        data = "Light On"
+    except Exception as err:
+        data = str(err)
+       
+    data = json.dumps(data)
     response = HttpResponse()
     response['Content-Type'] = "text/javascript"
     response.write(data)

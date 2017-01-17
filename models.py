@@ -1,4 +1,5 @@
 from django.db import models
+from nanpy import (ArduinoApi, SerialManager)
 
 class Measurement(models.Model):
     date = models.DateTimeField("Measurement Date")
@@ -9,6 +10,9 @@ class Measurement(models.Model):
 
     class Meta:
         get_latest_by = 'date'
+
+    def __str__ (self):
+        return str(self.date)
 
 class Aquarium(models.Model):
     frontlight = models.BooleanField("Front Light On")
@@ -43,16 +47,26 @@ class Aquarium(models.Model):
 
     def set_front_light_on(self):
         if (self.frontlight is False):
-            a = ArduinoTree()
-            a.digitalWrite(15, a.HIGH)
-            self.frontlight=TRUE
+            print ("Turning on Front Light")
+            conn = SerialManager()
+            a = ArduinoApi(connection = conn)
+            a.pinMode(7, a.OUTPUT)
+            a.digitalWrite(7, a.HIGH)
+            print ("after Digital Write FL")
+            self.frontlight=True
             self.save()
+            print ("after save FL")
+        else:
+            print ("Failed")
+
 
     def set_front_light_off(self):
         if (self.frontlight):
-            a = ArduinoTree()
-            a.digitalWrite(15, a.LOW)
-            self.frontlight=FALSE
+            conn = SerialManager()
+            a = ArduinoApi(connection = conn)
+            a.pinMode(7, a.OUTPUT)
+            a.digitalWrite(7, a.LOW)
+            self.frontlight=False
             self.save()
 
     def lastupdated(self):
@@ -65,5 +79,5 @@ class Aquarium(models.Model):
     ph = property(_get_last_ph)
 
     def __str__ (self):
-        return str(self.date)
+        return str(self.id)
 
