@@ -97,6 +97,21 @@ function get_os_data(url, element) {
     }, "json");
 }
 
+function toggleOn() {
+    $('#toggle-trigger').bootstrapToggle('on')
+}
+function toggleOff() {
+    $('#toggle-trigger').bootstrapToggle('off')  
+}
+function toggleOnByInput() {
+    $('#toggle-trigger').prop('checked', true).change()
+}
+function toggleOffByInput() {
+    $('#toggle-trigger').prop('checked', false).change()
+}
+
+
+
 var dashboard = {};
 
 dashboard.getUptime = function () {
@@ -291,3 +306,5 @@ $(document).ready(function () {
         $("i", this).toggleClass("icon-minus icon-plus");
     });
 });
+
+ 
