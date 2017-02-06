@@ -36,7 +36,7 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from pydash.models import Aquarium
 from django.utils import timezone
-
+from django.core import serializers
 
 #All refresh values are in miliseconds, 1 second = 1000 miliseconds
 #Adjust accordingly as you wish
@@ -591,9 +591,25 @@ def humidity(request):
     try:
         humidity = get_humidity()
     except Exception:
-        temp = None
+        humidity = None
 
     data = json.dumps(humidity)
+    response = HttpResponse()
+    response['Content-Type'] = "text/javascript"
+    response.write(data)
+    return response
+
+@login_required(login_url='login/')
+def aquariumstate(request):
+    """
+    Returns the state of all aquariums
+    """
+    try:
+        states = serializers.serialize('json', Aquarium.objects.all())
+    except Exception as err:
+        states = str(err)
+
+    data = json.dumps(states)
     response = HttpResponse()
     response['Content-Type'] = "text/javascript"
     response.write(data)

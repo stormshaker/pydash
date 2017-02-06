@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^info/lastupdated/$', views.lastupdated, name='lastupdated'),
     url(r'^info/frontlighton/$', views.frontlighton, name='frontlighton'),
     url(r'^info/frontlightoff/$', views.frontlightoff, name='frontlightoff'),
+    url(r'^info/state/$', views.aquariumstate, name='state'),
 ]

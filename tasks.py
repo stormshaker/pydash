@@ -4,7 +4,7 @@ from django.utils import timezone
 from pydash.models import Measurement
 from background_task import background
 
-@background(schedule=60)
+@background(schedule=30)
 def datacollector():
 
     # TODO: Ensure only a single instance runs
